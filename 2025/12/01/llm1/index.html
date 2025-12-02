@@ -20,25 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"buptlyx.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="心有所向，无问东西">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LeoLyx&#39;s Blog">
-<meta property="og:url" content="https://buptlyx.github.io/index.html">
+    <meta name="description" content="故事背景&emsp;&emsp;这学期，我们的神经网络课程设计大作业是经典的图像生成文字（ImageCaption）任务。直到今天，我才刚刚着手开始写代码，画了一些时间把数据集整理好，然后把任务需求统统塞给Gemini3Pro后，Gemini只花了不到半分钟的时间就给我生成了所有的代码，并且能完整运行不报错。虽然我深知今日的大语言模型在编程方面已经相当成熟，但是还是不由得感叹我们堂堂北邮人工智能专">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0开始的大语言模型之路(1)">
+<meta property="og:url" content="https://buptlyx.github.io/2025/12/01/llm1/index.html">
 <meta property="og:site_name" content="LeoLyx&#39;s Blog">
-<meta property="og:description" content="心有所向，无问东西">
+<meta property="og:description" content="故事背景&emsp;&emsp;这学期，我们的神经网络课程设计大作业是经典的图像生成文字（ImageCaption）任务。直到今天，我才刚刚着手开始写代码，画了一些时间把数据集整理好，然后把任务需求统统塞给Gemini3Pro后，Gemini只花了不到半分钟的时间就给我生成了所有的代码，并且能完整运行不报错。虽然我深知今日的大语言模型在编程方面已经相当成熟，但是还是不由得感叹我们堂堂北邮人工智能专">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-01T12:29:00.000Z">
+<meta property="article:modified_time" content="2025-12-02T08:43:37.415Z">
 <meta property="article:author" content="Lyx">
-<meta property="article:tag" content="DeepLearning,AI,NLP,技术,艺术,哲学">
+<meta property="article:tag" content="大模型,深度学习,Attention">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://buptlyx.github.io/">
+<link rel="canonical" href="https://buptlyx.github.io/2025/12/01/llm1/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://buptlyx.github.io/2025/12/01/llm1/","path":"2025/12/01/llm1/","title":"从0开始的大语言模型之路(1)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>LeoLyx's Blog</title>
+<title>从0开始的大语言模型之路(1) | LeoLyx's Blog</title>
   
 
 
@@ -91,7 +93,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">LeoLyx's Blog</h1>
+      <p class="site-title">LeoLyx's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">奔赴山海，保持热爱</p>
@@ -145,7 +147,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -158,6 +160,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%85%E4%BA%8B%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">故事背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%81%8A%E8%81%8A"><span class="nav-number">3.</span> <span class="nav-text">简单聊聊</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -193,16 +196,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://buptlyx.github.io/2025/12/01/llm1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -216,13 +220,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | LeoLyx's Blog">
+      <meta itemprop="name" content="从0开始的大语言模型之路(1) | LeoLyx's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/01/llm1/" class="post-title-link" itemprop="url">从0开始的大语言模型之路(1)</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          从0开始的大语言模型之路(1)
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -243,6 +247,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
@@ -266,8 +277,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="故事背景"><a href="#故事背景" class="headerlink" title="故事背景"></a>故事背景</h3><p>&emsp;&emsp;这学期，我们的神经网络课程设计大作业是经典的图像生成文字（ImageCaption）任务。直到今天，我才刚刚着手开始写代码，画了一些时间把数据集整理好，然后把任务需求统统塞给<strong>Gemini3Pro</strong>后，Gemini只花了不到半分钟的时间就给我生成了所有的代码，并且能完整运行不报错。虽然我深知今日的大语言模型在编程方面已经相当成熟，但是还是不由得感叹我们堂堂北邮人工智能专业，最核心专业课的课程大作业居然被AI给秒了？虽然受限于笔记本的显卡性能，Gemini给我的代码让我从下午五点跑到了晚上八点，但是这激发了整个学期只是混个考勤的我，对于语言模型的兴趣，于是便有了这一篇文章，甚至这篇博客都是为了写这篇文章专门搭建的。</p>
+    <div class="post-body" itemprop="articleBody"><h3 id="故事背景"><a href="#故事背景" class="headerlink" title="故事背景"></a>故事背景</h3><p>&emsp;&emsp;这学期，我们的神经网络课程设计大作业是经典的图像生成文字（ImageCaption）任务。直到今天，我才刚刚着手开始写代码，画了一些时间把数据集整理好，然后把任务需求统统塞给<strong>Gemini3Pro</strong>后，Gemini只花了不到半分钟的时间就给我生成了所有的代码，并且能完整运行不报错。虽然我深知今日的大语言模型在编程方面已经相当成熟，但是还是不由得感叹我们堂堂北邮人工智能专业，最核心专业课的课程大作业居然被AI给秒了？虽然受限于笔记本的显卡性能，Gemini给我的代码让我从下午五点跑到了晚上八点，但是这激发了整个学期只是混个考勤的我，对于语言模型的兴趣，于是便有了这一篇文章，甚至这篇博客都是为了写这篇文章专门搭建的。</p>
 <p>&emsp;&emsp;我打算从最最基础的开始学起，同时遵循我的偶像<strong>理查德·费曼</strong>的学习方法，边学边把学到的东西用最通俗易懂的方式讲出来。</p>
 <h3 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h3><p>&emsp;&emsp;在深入探讨语言模型的原理前，我们不妨先抛出一个问题：</p>
 <blockquote>
@@ -285,7 +295,6 @@
 </ol>
 <h3 id="简单聊聊"><a href="#简单聊聊" class="headerlink" title="简单聊聊"></a>简单聊聊</h3><p>以上是我目前对于语言模型一些能立马说出来的认识，当然这篇文章只是一个开篇综述，没有任何的代码或者数学推导，不过没有关系，我想要写的就是大部分人能看得懂的、入门级的<strong>偏教学类</strong>文章。后续也希望我可以继续更新，深入学习。</p>
 
-      
     </div>
 
     
@@ -293,11 +302,16 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Attention/" rel="tag"># 大模型,深度学习,Attention</a>
+          </div>
+
+        
+
     </footer>
   </article>
 </div>
+
 
 
 
